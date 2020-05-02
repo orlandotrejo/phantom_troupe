@@ -2,6 +2,7 @@
 import scrapy
 import json
 
+from ..items import MiriadaxItem
 
 class CursosSpider(scrapy.Spider):
     name = 'cursos'
@@ -16,25 +17,23 @@ class CursosSpider(scrapy.Spider):
 
         #This crawler does not include images. This can be changed!
 
-        allCurso = response.css("div.curs-title")
-        firstCurso = allCurso[0]
-        titulo = firstCurso.css("a::text").get()
-        url_titulo = firstCurso.css("a::attr(href)").get()
+        allCurso = response.css("div.curs-title")                       #Regresa Lista de Cursos
+        titulo = allCurso.css("a::text").getall()
+        url_titulo = allCurso.css("a::attr(href)").getall()
 
-        allUniversity = response.css("div.university")
-        firstUniversity = allUniversity[0]
-        universidad = firstUniversity.css("a::text").get()
-        url_universidad = firstUniversity.css("a::attr(href)").get()
+        allUniversity = response.css("div.university")                  #Regresa Lista de Universidades
+        universidad = allUniversity.css("a::text").getall()
+        url_universidad = allUniversity.css("a::attr(href)").getall()
 
-        allFecha = response.css("div.university-date::text").getall()
+        allFecha = response.css("div.university-date::text").getall()   #Regresa Lista de Fechas
 
-        allLogo = response.css("div.courselogodiv")
-        firstLogo = allLogo[0]
-        logo = firstLogo.css("img::attr(src-data)").get()
+        allLogo = response.css("div.courselogodiv")                     #Regresa Lista de Logos
+        logo = allLogo.css("img::attr(src-data)").getall()
 
         print(titulo)
         print(url_titulo)
         print(universidad)
-        print("https://miriadax.net" + url_universidad)
-        print(allFecha[0])
+        print(url_universidad)
+        #print("https://miriadax.net" + url_universidad)
+        print(allFecha)
         print(logo)

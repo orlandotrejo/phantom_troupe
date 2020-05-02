@@ -10,5 +10,10 @@ import scrapy
 
 class MiriadaxItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    course_name = scrapy.Field()
+    course_url = scrapy.Field()
+    university_name = scrapy.Field()
+    university_url = scrapy.Field()
+    date = scrapy.Field()
+    logo = scrapy.Field()
     pass
