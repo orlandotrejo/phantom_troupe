@@ -14,6 +14,7 @@ BOT_NAME = 'miriadax'
 SPIDER_MODULES = ['miriadax.spiders']
 NEWSPIDER_MODULE = 'miriadax.spiders'
 
+FEED_EXPORT_ENCODING = 'utf-8'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'miriadax (+http://www.yourdomain.com)'

@@ -6,8 +6,11 @@ from ..items import MiriadaxItem
 
 class CursosSpider(scrapy.Spider):
     name = 'cursos'
-    allowed_domains = ['miriadax.net/web/general-navigation/cursos']
-    start_urls = ['http://miriadax.net/web/general-navigation/cursos/']
+    #allowed_domains = ['miriadax.net/web/general-navigation/cursos']
+    #start_urls = ['http://miriadax.net/web/general-navigation/cursos/']
+
+    allowed_domains = ['file:///C:/Users/otrej/AppData/Local/Temp/tmpwe9u1vgh.html']
+    start_urls = ['file:///C:/Users/otrej/AppData/Local/Temp/tmpwe9u1vgh.html']
 
     def parse(self, response):
         print("\n")
@@ -30,10 +33,42 @@ class CursosSpider(scrapy.Spider):
         allLogo = response.css("div.courselogodiv")                     #Regresa Lista de Logos
         logo = allLogo.css("img::attr(src-data)").getall()
 
-        print(titulo)
-        print(url_titulo)
-        print(universidad)
-        print(url_universidad)
+        #print(titulo)
+        #print(url_titulo)
+        #print(universidad)
         #print("https://miriadax.net" + url_universidad)
-        print(allFecha)
-        print(logo)
+        #print(allFecha)
+        #print(logo)
+
+        print(len(titulo))
+        print(len(url_titulo))
+        print(len(universidad))
+        print(len(url_universidad))
+        print(len(allFecha))
+        print(len(logo))
+
+        if (len(titulo) == len(url_titulo) == len(universidad) == len(url_universidad) == len(allFecha) == len(logo)):
+            print("OK Todos con el mismo número")
+        else:
+            print("ERROR: Datos con números diferentes")
+
+        it = 0
+        for it in range(len(titulo)):
+
+            #print(titulo[it])
+            #print(url_titulo[it])
+            #print(universidad[it])
+            #print("https://miriadax.net" + url_universidad[it])
+            #print(allFecha[it])
+            #print(logo[it])
+
+            items = MiriadaxItem()
+
+            items['course_title'] = titulo[it]
+            items['url_course'] = url_titulo[it]
+            items['university'] = universidad[it]
+            items['url_university'] = str(("https://miriadax.net" + url_universidad[it]))
+            items['date'] = allFecha[it]
+            items['url_logo'] = logo[it]
+
+            yield items
