@@ -17,7 +17,7 @@ class CursosSpider(scrapy.Spider):
 
         #This crawler does not include images. This can be changed!
 
-        allCurso = response.css("div.curs-title")                       #Regresa Lista de Cursos
+        allCurso = response.css("div.name")                       #Regresa Lista de Cursos
         titulo = allCurso.css("a::text").getall()
         url_titulo = allCurso.css("a::attr(href)").getall()
 
